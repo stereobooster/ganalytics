@@ -1,9 +1,9 @@
 {
-  "name": "ganalytics",
-  "version": "3.1.2",
+  "name": "@stereobooster/ganalytics",
+  "version": "3.2.0",
   "umd:name": "GAnalytics",
-  "repository": "lukeed/ganalytics",
-  "description": "A tiny (312B) client-side module for tracking with Google Analytics",
+  "repository": "stereobooster/ganalytics",
+  "description": "A tiny client-side module for tracking with Google Analytics",
   "unpkg": "dist/ganalytics.min.js",
   "module": "dist/ganalytics.mjs",
   "main": "dist/ganalytics.js",
@@ -13,9 +13,6 @@
     "name": "Luke Edwards",
     "email": "luke.edwards05@gmail.com",
     "url": "lukeed.com"
-  },
-  "engines": {
-    "node": ">=4"
   },
   "scripts": {
     "build": "bundt",

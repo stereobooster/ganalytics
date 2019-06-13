@@ -1,25 +1,51 @@
-var KEY = 'ga:user';
+var consent = "ga:consent";
+var clientId = "ga:user";
 
-export default function (ua, args, toWait) {
-	args = Object.assign({}, args, {
-		tid: ua,
-		cid: (localStorage[KEY] = localStorage[KEY] || Math.random() + '.' + Math.random())
-	});
+export default function(ua, args, toWait) {
+	args = Object.assign(
+		{},
+		args,
+		{
+			tid: ua,
+			aip: 1
+		},
+		localStorage[consent]
+			? {
+					cid: (localStorage[clientId] =
+						localStorage[clientId] || Math.random() + "." + Math.random())
+			  }
+			: { uid: "anonymous" }
+	);
 
 	function send(type, opts) {
-		if (type === 'pageview' && !opts) {
-			opts = { dl:location.href, dt:document.title };
-		}
-		var k, str='https://www.google-analytics.com/collect?v=1';
-		var obj = Object.assign({ t:type }, args, opts, { z:Date.now() });
+		if (!opts) opts = {};
+		var k,
+			str = "https://www.google-analytics.com/collect?v=1",
+			d = document;
+		var obj = Object.assign(
+			{
+				t: type,
+				dl: location.href,
+				dt: d.title,
+				dr: d.referrer,
+				sr: screen.width + "x" + screen.height,
+				vp:
+					Math.max(d.documentElement.clientWidth, innerWidth || 0) +
+					"x" +
+					Math.max(d.documentElement.clientHeight, innerHeight || 0)
+			},
+			args,
+			opts,
+			{ z: Date.now() }
+		);
 		for (k in obj) {
 			// modified `obj-str` behavior
-			if (obj[k]) str += ('&' + k + '=' + encodeURIComponent(obj[k]));
+			if (obj[k]) str += "&" + k + "=" + encodeURIComponent(obj[k]);
 		}
 		new Image().src = str; // dispatch a GET
 	}
 
-	toWait || send('pageview');
+	toWait || send("pageview");
 
 	return { args, send };
 }
