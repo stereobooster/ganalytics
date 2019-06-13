@@ -3,9 +3,8 @@ var clientId = "ga:user";
 
 export default function(ua, args, toWait) {
 	args = Object.assign(
-		{},
-		args,
 		{ tid: ua },
+		args,
 		localStorage[consent]
 			? {
 					cid: (localStorage[clientId] =
