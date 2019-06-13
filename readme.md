@@ -15,14 +15,22 @@ _Please see [Releases](https://github.com/stereobooster/ganalytics/releases) for
 ## Install
 
 ```
-$ npm install --save @stereobooster/ganalytics
+$ yarn add @stereobooster/ganalytics
 ```
 
 ## Usage
 
 ```js
-const GAnalytics = require("ganalytics");
+import GAnalytics from "@stereobooster/ganalytics";
 
+if (
+  window.location.hostname !== "localhost" &&
+  !navigator.doNotTrack
+) {
+  GAnalytics("UA-XXXXXXXX-X", { aid: 1 });
+}
+
+// or
 const ga = new GAnalytics("UA-XXXXXXXX-X", { aid: 1 });
 // or
 const ga = GAnalytics("UA-XXXXXXXX-X", { aid: 1 });
