@@ -14,13 +14,11 @@ export default function(ua, args, toWait) {
 	);
 
 	function send(type, opts) {
-		if (!opts) opts = {};
 		var k,
-			str = "https://www.google-analytics.com/collect?v=1",
-			d = document;
-		var obj = Object.assign(
-			{
-				t: type,
+		  d = document,
+			str = "https://www.google-analytics.com/collect?v=1";
+		if (type === "pageview" && !opts) {
+			opts = {
 				dl: location.href,
 				dt: d.title,
 				dr: d.referrer,
@@ -29,11 +27,9 @@ export default function(ua, args, toWait) {
 					Math.max(d.documentElement.clientWidth, innerWidth || 0) +
 					"x" +
 					Math.max(d.documentElement.clientHeight, innerHeight || 0)
-			},
-			args,
-			opts,
-			{ z: Date.now() }
-		);
+			};
+		}
+		var obj = Object.assign({ t: type }, args, opts, { z: Date.now() });
 		for (k in obj) {
 			// modified `obj-str` behavior
 			if (obj[k]) str += "&" + k + "=" + encodeURIComponent(obj[k]);

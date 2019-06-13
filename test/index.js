@@ -126,9 +126,8 @@ test('ga.send', t => {
 	foo.send('event', data);
 	isData(t, 'UA-STRING', 'event', data);
 
-	// TODO: why not include it by default?
-	// t.false(_SENT_.src.includes(`&dt=`), '~~> does NOT auto-include the `document.title` when options are passed (`dt`)');
-	// t.false(_SENT_.src.includes(`&dl=`), '~~> does NOT auto-include the `location.href` when options are passed (`dl`)');
+	t.false(_SENT_.src.includes(`&dt=`), '~~> does NOT auto-include the `document.title` when options are passed (`dt`)');
+	t.false(_SENT_.src.includes(`&dl=`), '~~> does NOT auto-include the `location.href` when options are passed (`dl`)');
 
 	console.log(' ');	// spacer
 
@@ -136,8 +135,8 @@ test('ga.send', t => {
 	foo.send('pageview', data);
 	isData(t, 'UA-STRING', 'pageview', data);
 
-	// t.false(_SENT_.src.includes(`&dt=`), '~~> does NOT auto-include the `document.title` when options are passed (`dt`)');
-	// t.false(_SENT_.src.includes(`&dl=`), '~~> does NOT auto-include the `location.href` when options are passed (`dl`)');
+	t.false(_SENT_.src.includes(`&dt=`), '~~> does NOT auto-include the `document.title` when options are passed (`dt`)');
+	t.false(_SENT_.src.includes(`&dl=`), '~~> does NOT auto-include the `location.href` when options are passed (`dl`)');
 
 	t.end();
 });
