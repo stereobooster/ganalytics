@@ -5,16 +5,13 @@ export default function(ua, args, toWait) {
 	args = Object.assign(
 		{},
 		args,
-		{
-			tid: ua,
-			aip: 1
-		},
+		{ tid: ua },
 		localStorage[consent]
 			? {
 					cid: (localStorage[clientId] =
 						localStorage[clientId] || Math.random() + "." + Math.random())
 			  }
-			: { uid: "anonymous" }
+			: { uid: "anonymous", aip: 1 }
 	);
 
 	function send(type, opts) {
