@@ -1,6 +1,6 @@
 {
   "name": "@stereobooster/ganalytics",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "umd:name": "GAnalytics",
   "repository": "stereobooster/ganalytics",
   "description": "A tiny client-side module for tracking with Google Analytics",

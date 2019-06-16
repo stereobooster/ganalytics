@@ -1,11 +1,11 @@
-var consent = "ga:consent";
 var clientId = "ga:user";
 
 export default function(ua, args, toWait) {
 	args = Object.assign(
 		{ tid: ua },
 		args,
-		localStorage[consent]
+		{ consent: 0 },
+		args && args.consent
 			? {
 					cid: (localStorage[clientId] =
 						localStorage[clientId] || Math.random() + "." + Math.random())
@@ -15,7 +15,7 @@ export default function(ua, args, toWait) {
 
 	function send(type, opts) {
 		var k,
-		  d = document,
+			d = document,
 			str = "https://www.google-analytics.com/collect?v=1";
 		if (type === "pageview" && !opts) {
 			opts = {

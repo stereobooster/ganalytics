@@ -1,6 +1,6 @@
 # ganalytics [![Build Status](https://travis-ci.org/stereobooster/ganalytics.svg?branch=master)](https://travis-ci.org/stereobooster/ganalytics)
 
-> A tiny (485B) client-side module for tracking with Google Analytics
+> A tiny (425B) client-side module for tracking with Google Analytics
 
 This is the fork of [lukeed/ganalytics](https://github.com/lukeed/ganalytics).
 
@@ -23,11 +23,8 @@ $ yarn add @stereobooster/ganalytics
 ```js
 import GAnalytics from "@stereobooster/ganalytics";
 
-if (
-  window.location.hostname !== "localhost" &&
-  !navigator.doNotTrack
-) {
-  GAnalytics("UA-XXXXXXXX-X", { aid: 1 });
+if (window.location.hostname !== "localhost" && !navigator.doNotTrack) {
+  GAnalytics("UA-XXXXXXXX-X", { consent: localStorage["ga:consent"] });
 }
 
 // or
